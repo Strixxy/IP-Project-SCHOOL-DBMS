@@ -120,6 +120,13 @@ def classaverage():
 def updatemarklist():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
+    mycursor.execute("select STD_ID,STD_NAME from students")
+    results = mycursor.fetchall()
+    t = PrettyTable(['STD_ID', 'STD_NAME'])
+    for STD_ID, STD_NAME in results:
+        t.add_row([STD_ID, STD_NAME])
+    print('Refer The Below Table For Student Id And Name')
+    print(t)
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
     exam = input('Select The TP')
     if exam == '1':
