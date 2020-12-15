@@ -207,7 +207,7 @@ def classyearlyperformance():
     x = [tp1_avg, tp2_avg, tp3_avg, tp4_avg]
     y = ['Tp1', 'Tp2', 'Tp3', 'Tp4']
     plt.plot(y, x, marker='*',label='Yearly Class Average', color='#4AD6AB')
-    plt.xlabel('Marks')
+    plt.xlabel('Average')
     plt.ylabel('Test Papers')
     plt.legend(loc='upper right')
     plt.show()
