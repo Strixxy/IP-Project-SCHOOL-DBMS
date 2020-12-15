@@ -1,6 +1,8 @@
 import mysql.connector as sql
 from tabulate import tabulate
 from prettytable import PrettyTable
+import matplotlib.pyplot as plt
+import numpy as np
 conn = sql.connect(host='localhost', user='root', password='1234', database='project')
 mycursor = conn.cursor()
 
@@ -17,10 +19,10 @@ def sqlprint():
 def teacher():
     while True:
         tea_table = [[1, "STUDENT LIST"], [2, "STUDENT DETAILS"], [3, 'MARKLIST'], [4, 'CLASS AVERAGE'],
-                     [5, 'ADD TP MARKS'], [6,'Conduct A New Tp'],[0, 'GO BACK TO THE MAIN MENU']]
+                     [5, 'ADD TP MARKS'],[6,'CLASS YEARLY PERFORMANCE'],[0,'GO BACK TO THE MAIN MENU']]
         tea_headers = ['Teacher Menu']
         print(tabulate(tea_table, tea_headers, tablefmt="fancy_grid", floatfmt=".1f"))
-        choice: str or int = input('Enter Your Choice')
+        choice: str or int = input('Enter Your Choice').upper()
         if choice == '1' or choice == 'STUDENT LIST':
             stdlist()
         elif choice == '2' or choice == 'STUDENT DETAILS':
@@ -31,6 +33,8 @@ def teacher():
             classaverage()
         elif choice == '5' or choice == 'ADD TP MARKS':
             updatemarklist()
+        elif choice == '6' or choice == 'CLASS YEARLY PERFORMANCE':
+            classyearlyperformance()
         elif choice == '0' or choice == ' GO BACK TO THE MAIN MENU':
             break
 
@@ -171,8 +175,39 @@ def updatemarklist():
         PHYSICS = int(input('Enter the mark for Physics'))
         mycursor.execute(
             "insert into tp4 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
-                                                                                         MALAYALAM, MATHS, BIOLOGY,
-                                                                                         CHEMISTRY, PHYSICS))
+                                                                                         MALAYALAM, MATHS, BIOLOGY,CHEMISTRY, PHYSICS))
         conn.commit()
     else:
         print('Wrong Option')
+def classyearlyperformance():
+    mycursor.execute(
+        "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100  from tp1 ")
+    x1 = mycursor.fetchall()
+    for i in x1:
+        tp1data = x1
+    tp1_avg = (np.mean(tp1data))
+    mycursor.execute(
+        "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100 from tp2 ")
+    x2 = mycursor.fetchall()
+    for i in x2:
+        tp2data = x2
+    tp2_avg = (np.mean(tp2data))
+    mycursor.execute(
+        "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100 from tp3 ")
+    x3 = mycursor.fetchall()
+    for i in x3:
+        tp3data = x3
+    tp3_avg = (np.mean(tp3data))
+    mycursor.execute(
+        "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100 from tp4 ")
+    x4 = mycursor.fetchall()
+    for i in x4:
+        tp4data = x4
+    tp4_avg = (np.mean(tp4data))
+    x = [tp1_avg, tp2_avg, tp3_avg, tp4_avg]
+    y = ['Tp1', 'Tp2', 'Tp3', 'Tp4']
+    plt.plot(y, x, marker='*',label='Yearly Class Average', color='#4AD6AB')
+    plt.xlabel('Marks')
+    plt.ylabel('Test Papers')
+    plt.legend(loc='upper right')
+    plt.show()
