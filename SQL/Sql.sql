@@ -69,19 +69,20 @@ CREATE TABLE IF NOT EXISTS `students` (
   `STD_GRADEE` int DEFAULT NULL,
   `STD_AGE` date DEFAULT NULL,
   `STD_NUMBER` bigint DEFAULT NULL,
+  `STD_ADDRESS` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`STD_ID`),
   UNIQUE KEY `STD_ID` (`STD_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table project.students: ~6 rows (approximately)
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` (`STD_ID`, `STD_NAME`, `STD_GRADEE`, `STD_AGE`, `STD_NUMBER`) VALUES
-	(1, 'Paul', 12, '2003-05-13', 8281209675),
-	(2, 'Jillu', 10, '2000-04-23', 8282209678),
-	(3, 'Ray', 11, '2002-05-14', 9246566585),
-	(4, 'Abhi', 11, '2003-12-02', 2255456745),
-	(5, 'John', 12, '2002-06-14', 9567846357),
-	(6, 'Akash', 12, '2003-10-13', 9532560569);
+INSERT INTO `students` (`STD_ID`, `STD_NAME`, `STD_GRADEE`, `STD_AGE`, `STD_NUMBER`, `STD_ADDRESS`) VALUES
+	(1, 'Paul', 12, '2003-05-13', 8281209675, NULL),
+	(2, 'Jillu', 10, '2000-04-23', 8282209678, NULL),
+	(3, 'Ray', 11, '2002-05-14', 9246566585, NULL),
+	(4, 'Abhi', 11, '2003-12-02', 2255456745, NULL),
+	(5, 'John', 12, '2002-06-14', 9567846357, NULL),
+	(6, 'Akash', 12, '2003-10-13', 9532560569, NULL);
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 
 -- Dumping structure for table project.teacher
@@ -136,12 +137,13 @@ CREATE TABLE IF NOT EXISTS `tp2` (
   `PHYSICS` int DEFAULT NULL,
   PRIMARY KEY (`STD_ID`),
   CONSTRAINT `FK_tp2_students` FOREIGN KEY (`STD_ID`) REFERENCES `students` (`STD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table project.tp2: ~0 rows (approximately)
+-- Dumping data for table project.tp2: ~2 rows (approximately)
 /*!40000 ALTER TABLE `tp2` DISABLE KEYS */;
 INSERT INTO `tp2` (`STD_ID`, `STD_NAME`, `ENGLISH`, `MALAYALAM`, `MATHS`, `BIOLOGY`, `CHEMISTRY`, `PHYSICS`) VALUES
-	(1, 'Paul', 98, 77, 87, 97, 24, 56);
+	(1, 'Paul', 98, 77, 87, 97, 24, 56),
+	(2, 'Abhi', 34, 54, 23, 87, 69, 91);
 /*!40000 ALTER TABLE `tp2` ENABLE KEYS */;
 
 -- Dumping structure for table project.tp3
@@ -156,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `tp3` (
   `PHYSICS` int DEFAULT NULL,
   PRIMARY KEY (`STD_ID`),
   CONSTRAINT `FK_tp3_students` FOREIGN KEY (`STD_ID`) REFERENCES `students` (`STD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table project.tp3: ~0 rows (approximately)
+-- Dumping data for table project.tp3: ~1 rows (approximately)
 /*!40000 ALTER TABLE `tp3` DISABLE KEYS */;
 INSERT INTO `tp3` (`STD_ID`, `STD_NAME`, `ENGLISH`, `MALAYALAM`, `MATHS`, `BIOLOGY`, `CHEMISTRY`, `PHYSICS`) VALUES
 	(1, 'Paul', 89, 78, 68, 80, 95, 87);
@@ -178,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `tp4` (
   CONSTRAINT `FK_tp4_students` FOREIGN KEY (`STD_ID`) REFERENCES `students` (`STD_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table project.tp4: ~0 rows (approximately)
+-- Dumping data for table project.tp4: ~1 rows (approximately)
 /*!40000 ALTER TABLE `tp4` DISABLE KEYS */;
 INSERT INTO `tp4` (`STD_ID`, `STD_NAME`, `ENGLISH`, `MALAYALAM`, `MATHS`, `BIOLOGY`, `CHEMISTRY`, `PHYSICS`) VALUES
 	(1, 'Paul', 45, 98, 78, 69, 79, 86);
