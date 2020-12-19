@@ -1,4 +1,5 @@
 import datetime
+import sys
 
 import mysql.connector as sql
 from prettytable import PrettyTable
@@ -11,7 +12,7 @@ mycursor = conn.cursor()
 def admin():
     while True:
         adm_table = [[1, "Student Registration"], [2, "Employee Registration"], [3, 'Student Details'],
-                     [4, 'Employee Details'], [0, 'Go Back To Main Menu']]
+                     [4, 'Employee Details'], [0, 'Go Back To Main Menu'], ['*', 'EXIT']]
         adm_headers = ['Admin Menu']
         print(tabulate(adm_table, adm_headers, tablefmt="fancy_grid", floatfmt=".1f"))
         choice: str or int = input('Enter Your Choice: ').upper()
@@ -25,6 +26,9 @@ def admin():
             emplist()
         elif choice == '0' or choice == ' Go Back To Main Menu':
             break
+        elif choice == '*' or choice == 'EXIT':
+            print('Thank You')
+            sys.exit()
         else:
             print('Enter An Valid Option')
 
@@ -41,8 +45,10 @@ def stdregister():
     month = int(input('Enter The Month: '))
     day = int(input('Enter The Day: '))
     STD_AGE = datetime.datetime(year, month, day)
+    STD_ADDRESS = input('Enter The Address: ')
     mycursor.execute(
-        "insert into students values('{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, STD_GRADEE, STD_AGE, STD_NO))
+        "insert into students values('{}','{}', '{}', '{}','{}''{}')".format(STD_ID, STD_NAME, STD_GRADEE, STD_AGE,
+                                                                             STD_NO, STD_ADDRESS))
     conn.commit()
     print('Entry Sucessful')
 

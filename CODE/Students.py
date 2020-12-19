@@ -1,16 +1,18 @@
+import sys
+
+import matplotlib.pyplot as plt
 import mysql.connector as sql
 import prettytable
 from tabulate import tabulate
-import matplotlib.pyplot as plt
+
 conn = sql.connect(host='localhost', user='root', password='1234', database='project')
 mycursor = conn.cursor()
 
 
 def student():
     while True:
-        std_table = [[1, "TP MARK"], [2, "Student Details"], [3, "AVERAGE  MARK"],[4,'YEARLY PERFORMANCE'],
-                     [5, "EXIT"],
-                     [0, 'Go Back To Main Menu']]
+        std_table = [[1, "TP MARK"], [2, "Student Details"], [3, "AVERAGE  MARK"], [4, 'YEARLY PERFORMANCE'],
+                     [0, 'Go Back To Main Menu'], ['*', 'EXIT']]
         std_headers = ['Students Menu']
         print(tabulate(std_table, std_headers, tablefmt="fancy_grid", floatfmt=".1f"))
         std_choice: str or int = input('Enter Your Choice').capitalize()
@@ -22,8 +24,9 @@ def student():
             avgmark()
         elif std_choice == '4' or std_choice == 'YEARLY PERFORMANCE':
             yearlyperformance()
-        elif std_choice == '5' or std_choice == 'EXIT':
+        elif std_choice == '*' or std_choice == 'EXIT':
             print("Thank You")
+            sys.exit()
         elif std_choice == '0' or std_choice == ' Go Back To Main Menu':
             break
         else:
@@ -40,7 +43,7 @@ def sqlprint():
 
 
 def submark():
-    stdid= int(input("Enter The Student Id: "))
+    stdid = int(input("Enter The Student Id: "))
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
@@ -107,6 +110,8 @@ def avgmark():
 
     else:
         print('Wrong Option')
+
+
 def yearlyperformance():
     stdid = int(input('Enter Your Student ID'))
     mycursor.execute(

@@ -1,3 +1,5 @@
+import sys
+
 from tabulate import tabulate
 
 import Admin
@@ -5,7 +7,7 @@ import Students
 import Teacher
 
 while True:
-    table = [{1, "Admin"}, [2, "Teacher"], [3, 'Student'], [4, 'Exit']]
+    table = [{1, "Admin"}, [2, "Teacher"], [3, 'Student'], ['*', 'Exit']]
     headers = ['Id', "Options"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))  # tabulate is used for printing the menu
     desig: str or int = input('Enter Your Option: ').upper()
@@ -15,8 +17,8 @@ while True:
         Teacher.teacher()
     elif desig == '3' or desig == 'STUDENT':
         Students.student()
-    elif desig == '4' or desig == 'EXIT':
+    elif desig == '*' or desig == 'EXIT':
         print("Thank You")
-        break
+        sys.exit()
     else:
         print('Enter A Valid Option')

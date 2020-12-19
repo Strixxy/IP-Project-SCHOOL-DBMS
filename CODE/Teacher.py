@@ -1,8 +1,11 @@
-import mysql.connector as sql
-from tabulate import tabulate
-from prettytable import PrettyTable
+import sys
+
 import matplotlib.pyplot as plt
+import mysql.connector as sql
 import numpy as np
+from prettytable import PrettyTable
+from tabulate import tabulate
+
 conn = sql.connect(host='localhost', user='root', password='1234', database='project')
 mycursor = conn.cursor()
 
@@ -15,12 +18,12 @@ def sqlprint():
     print(t)
 
 
-
 def teacher():
     while True:
         tea_table = [[1, "STUDENT LIST"], [2, "STUDENT DETAILS"], [3, 'MARKLIST'], [4, 'CLASS AVERAGE'],
-                     [5, 'ADD TP MARKS'],[6,'CLASS YEARLY PERFORMANCE'],[0,'GO BACK TO THE MAIN MENU']]
-        tea_headers = ['Teacher Menu']
+                     [5, 'ADD TP MARKS'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
+                     ['*', 'EXIT']]
+        tea_headers = ['Teacher Menu'],
         print(tabulate(tea_table, tea_headers, tablefmt="fancy_grid", floatfmt=".1f"))
         choice: str or int = input('Enter Your Choice').upper()
         if choice == '1' or choice == 'STUDENT LIST':
@@ -35,6 +38,9 @@ def teacher():
             updatemarklist()
         elif choice == '6' or choice == 'CLASS YEARLY PERFORMANCE':
             classyearlyperformance()
+        elif choice == '*' or choice == 'EXIT':
+            print('Thank You')
+            sys.exit()
         elif choice == '0' or choice == ' GO BACK TO THE MAIN MENU':
             break
 
@@ -51,7 +57,6 @@ def stdlist():
     print(t)
 
 
-
 def stddetails():
     stdid = int(input('Enter The Student Id'))
     mycursor.execute("select * from students where STD_ID='{}'".format(stdid))
@@ -60,7 +65,6 @@ def stddetails():
     for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER in results:
         t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER])
     print(t)
-
 
 
 def marklist():
@@ -117,6 +121,17 @@ def classaverage():
         print('Wrong Option')
 
 
+# def examinput():
+#     STD_ID = int(input("Enter The Student Id: "))
+#     STD_NAME = input("Enter the Name: ")
+#     ENGLISH = int(input('Enter the mark for Engish'))
+#     MALAYALAM = int(input('Enter the mark for Malayalam'))
+#     MATHS = int(input('Enter the mark for Maths'))
+#     BIOLOGY = int(input('Enter the mark for Biology'))
+#     CHEMISTRY = int(input('Enter the mark for Chemistry'))
+#     PHYSICS = int(input('Enter the mark for Physics'))
+
+
 def updatemarklist():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
@@ -130,6 +145,7 @@ def updatemarklist():
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
     exam = input('Select The TP')
     if exam == '1':
+        # todo examinput() The variables are not getting read when i call the function
         STD_ID = int(input("Enter The Student Id: "))
         STD_NAME = input("Enter the Name: ")
         ENGLISH = int(input('Enter the mark for Engish'))
@@ -182,10 +198,13 @@ def updatemarklist():
         PHYSICS = int(input('Enter the mark for Physics'))
         mycursor.execute(
             "insert into tp4 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
-                                                                                         MALAYALAM, MATHS, BIOLOGY,CHEMISTRY, PHYSICS))
+                                                                                         MALAYALAM, MATHS, BIOLOGY,
+                                                                                         CHEMISTRY, PHYSICS))
         conn.commit()
     else:
         print('Wrong Option')
+
+
 def classyearlyperformance():
     mycursor.execute(
         "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100  from tp1 ")
@@ -213,7 +232,7 @@ def classyearlyperformance():
     tp4_avg = (np.mean(tp4data))
     x = [tp1_avg, tp2_avg, tp3_avg, tp4_avg]
     y = ['Tp1', 'Tp2', 'Tp3', 'Tp4']
-    plt.plot(y, x, marker='*',label='Yearly Class Average', color='#4AD6AB')
+    plt.plot(y, x, marker='*', label='Yearly Class Average', color='#4AD6AB')
     plt.xlabel('Average')
     plt.ylabel('Test Papers')
     plt.legend(loc='upper right')
