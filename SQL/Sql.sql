@@ -115,14 +115,15 @@ CREATE TABLE IF NOT EXISTS `tp1` (
   `PHYSICS` int DEFAULT NULL,
   PRIMARY KEY (`STD_ID`),
   CONSTRAINT `FK_tp1_students` FOREIGN KEY (`STD_ID`) REFERENCES `students` (`STD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table project.tp1: ~3 rows (approximately)
 /*!40000 ALTER TABLE `tp1` DISABLE KEYS */;
 INSERT INTO `tp1` (`STD_ID`, `STD_NAME`, `ENGLISH`, `MALAYALAM`, `MATHS`, `BIOLOGY`, `CHEMISTRY`, `PHYSICS`) VALUES
 	(1, 'Paul', 90, 89, 80, 90, 80, 85),
 	(2, 'Abhi', 80, 90, 87, 80, 79, 89),
-	(3, 'Joe', 87, 67, 98, 78, 90, 87);
+	(3, 'Joe', 87, 67, 98, 78, 90, 87),
+	(6, 'Akash', 76, 89, 84, 76, 98, 6);
 /*!40000 ALTER TABLE `tp1` ENABLE KEYS */;
 
 -- Dumping structure for table project.tp2
@@ -180,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `tp4` (
   CONSTRAINT `FK_tp4_students` FOREIGN KEY (`STD_ID`) REFERENCES `students` (`STD_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table project.tp4: ~1 rows (approximately)
+-- Dumping data for table project.tp4: ~0 rows (approximately)
 /*!40000 ALTER TABLE `tp4` DISABLE KEYS */;
 INSERT INTO `tp4` (`STD_ID`, `STD_NAME`, `ENGLISH`, `MALAYALAM`, `MATHS`, `BIOLOGY`, `CHEMISTRY`, `PHYSICS`) VALUES
 	(1, 'Paul', 45, 98, 78, 69, 79, 86);

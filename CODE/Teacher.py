@@ -51,9 +51,9 @@ def stdlist():
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
     mycursor.execute("select * from students")
     results = mycursor.fetchall()
-    t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER'])
-    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER in results:
-        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER])
+    t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER', 'STD_ADDRESS'])
+    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS in results:
+        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS])
     print(t)
 
 
@@ -61,9 +61,9 @@ def stddetails():
     stdid = int(input('Enter The Student Id'))
     mycursor.execute("select * from students where STD_ID='{}'".format(stdid))
     results = mycursor.fetchall()
-    t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER'])
-    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER in results:
-        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER])
+    t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER', 'STD_ADDRESS'])
+    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS in results:
+        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS])
     print(t)
 
 
@@ -96,24 +96,24 @@ def classaverage():
     exam = input('Select The TP')
     if exam == '1':
         mycursor.execute(
-            "select  STD_ID, STD_NAME, avg(ENGLISH), avg(MALAYALAM) , avg(Maths) , avg(BIOLOGY) , "
+            "select avg(ENGLISH), avg(MALAYALAM) , avg(Maths) , avg(BIOLOGY) , "
             "avg(CHEMISTRY), avg(PHYSICS)  from tp1")
         sqlprint()
     elif exam == '2':
         mycursor.execute(
-            "select  STD_ID, STD_NAME, avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
+            "select  avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
             " avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp2")
         sqlprint()
     elif exam == '3':
         mycursor.execute(
-            "select STD_ID, STD_NAME,  avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
+            "select avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
             " avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp3")
         sqlprint()
     elif exam == '4':
         mycursor.execute(
-            "select  STD_ID, STD_NAME, avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths, "
+            "select avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths, "
             "avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp4")
         sqlprint()

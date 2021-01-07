@@ -69,9 +69,9 @@ def stddetails():
     stdid = int(input('Enter The Student Id'))
     mycursor.execute("select * from students where STD_ID='{}'".format(stdid))
     results = mycursor.fetchall()
-    t = prettytable.PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER'])
-    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER in results:
-        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER])
+    t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER', 'STD_ADDRESS'])
+    for STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS in results:
+        t.add_row([STD_ID, STD_NAME, STD_GRADE, STD_AGE, STD_NUMBER, STD_ADDRESS])
     print(t)
 
 
