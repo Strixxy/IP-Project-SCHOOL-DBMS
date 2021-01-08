@@ -120,18 +120,6 @@ def classaverage():
     else:
         print('Wrong Option')
 
-
-# def examinput():
-#     STD_ID = int(input("Enter The Student Id: "))
-#     STD_NAME = input("Enter the Name: ")
-#     ENGLISH = int(input('Enter the mark for Engish'))
-#     MALAYALAM = int(input('Enter the mark for Malayalam'))
-#     MATHS = int(input('Enter the mark for Maths'))
-#     BIOLOGY = int(input('Enter the mark for Biology'))
-#     CHEMISTRY = int(input('Enter the mark for Chemistry'))
-#     PHYSICS = int(input('Enter the mark for Physics'))
-
-
 def updatemarklist():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
