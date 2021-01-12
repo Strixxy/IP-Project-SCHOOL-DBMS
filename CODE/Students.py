@@ -3,6 +3,7 @@ import sys
 import matplotlib.pyplot as plt
 import mysql.connector as sql
 import prettytable
+from prettytable.prettytable import PrettyTable
 from tabulate import tabulate
 
 conn = sql.connect(host='localhost', user='root', password='1234', database='project')
@@ -15,7 +16,7 @@ def student():
                      [0, 'Go Back To Main Menu'], ['*', 'EXIT']]
         std_headers = ['Students Menu']
         print(tabulate(std_table, std_headers, tablefmt="fancy_grid", floatfmt=".1f"))
-        std_choice: str or int = input('Enter Your Choice').capitalize()
+        std_choice: str or int = input('Enter Your Choice: ').capitalize()
         if std_choice == '1' or std_choice == 'SUBJECT MARK':
             submark()
         elif std_choice == '2' or std_choice == 'MARKLIST':
@@ -47,7 +48,7 @@ def submark():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    exam = input('Select The Tp')
+    exam = input('Select The Tp: ')
 
     if exam == '1':
         mycursor.execute(" select * from tp1 where STD_ID= '{}' ".format(stdid))
@@ -66,7 +67,7 @@ def submark():
 
 
 def stddetails():
-    stdid = int(input('Enter The Student Id'))
+    stdid = int(input('Enter The Student Id: '))
     mycursor.execute("select * from students where STD_ID='{}'".format(stdid))
     results = mycursor.fetchall()
     t = PrettyTable(['STD_ID', 'STD_NAME', 'STD_GRADE', 'STD_AGE', 'STD_NUMBER', 'STD_ADDRESS'])
@@ -76,12 +77,12 @@ def stddetails():
 
 
 def avgmark():
-    stdid = int(input('Enter Your Student ID'))
+    stdid = int(input('Enter Your Student ID: '))
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4'],
              ]
     headers = ["Conducted Exams"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    exam = input('Select The TP')
+    exam = input('Select The TP: ')
     if exam == '1':
         mycursor.execute(
             "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100  from tp1 where STD_ID='{}'".format(
@@ -113,7 +114,7 @@ def avgmark():
 
 
 def yearlyperformance():
-    stdid = int(input('Enter Your Student ID'))
+    stdid = int(input('Enter Your Student ID: '))
     mycursor.execute(
         "select  (ENGLISH+MALAYALAM+Maths+BIOLOGY+CHEMISTRY+PHYSICS)*6/100  from tp1 where STD_ID='{}'".format(
             stdid))

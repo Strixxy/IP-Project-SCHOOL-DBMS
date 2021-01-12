@@ -12,9 +12,9 @@ mycursor = conn.cursor()
 
 def sqlprint():
     results = mycursor.fetchall()
-    t = PrettyTable(['STD_ID', 'STD_NAME', 'ENGLISH', 'MALAYALAM', 'MATHS', 'BIOLOGY', 'CHEMISTRY', 'PHYSICS'])
-    for STD_ID, STD_NAME, ENGLISH, MALAYALAM, MATHS, BIOLOGY, CHEMISTRY, PHYSICS in results:
-        t.add_row([STD_ID, STD_NAME, ENGLISH, MALAYALAM, MATHS, BIOLOGY, CHEMISTRY, PHYSICS])
+    t = PrettyTable(['ENGLISH', 'MALAYALAM', 'MATHS', 'BIOLOGY', 'CHEMISTRY', 'PHYSICS'])
+    for ENGLISH, MALAYALAM, MATHS, BIOLOGY, CHEMISTRY, PHYSICS in results:
+        t.add_row([ENGLISH, MALAYALAM, MATHS, BIOLOGY, CHEMISTRY, PHYSICS])
     print(t)
 
 
@@ -23,7 +23,7 @@ def teacher():
         tea_table = [[1, "STUDENT LIST"], [2, "STUDENT DETAILS"], [3, 'MARKLIST'], [4, 'CLASS AVERAGE'],
                      [5, 'ADD TP MARKS'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
                      ['*', 'EXIT']]
-        tea_headers = ['Teacher Menu'],
+        tea_headers = ['Teacher Menu']
         print(tabulate(tea_table, tea_headers, tablefmt="fancy_grid", floatfmt=".1f"))
         choice: str or int = input('Enter Your Choice').upper()
         if choice == '1' or choice == 'STUDENT LIST':
@@ -71,7 +71,7 @@ def marklist():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    exam = input('Select The Tp')
+    exam = input('Select The Tp: ')
     if exam == '1':
         mycursor.execute("select * from tp1")
         sqlprint()
@@ -93,7 +93,7 @@ def classaverage():
     table = [[1, "Test Paper 1"], [2, "Test Paper 2"], [3, 'Test Paper 3'], [4, 'Test Paper 4']]
     headers = ["Conducted Exams"]
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    exam = input('Select The TP')
+    exam = input('Select The TP: ')
     if exam == '1':
         mycursor.execute(
             "select avg(ENGLISH), avg(MALAYALAM) , avg(Maths) , avg(BIOLOGY) , "
@@ -131,31 +131,31 @@ def updatemarklist():
     print('Refer The Below Table For Student Id And Name')
     print(t)
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    exam = input('Select The TP')
+    exam = input('Select The TP: ')
     if exam == '1':
         # todo examinput() The variables are not getting read when i call the function
         STD_ID = int(input("Enter The Student Id: "))
         STD_NAME = input("Enter the Name: ")
-        ENGLISH = int(input('Enter the mark for Engish'))
-        MALAYALAM = int(input('Enter the mark for Malayalam'))
-        MATHS = int(input('Enter the mark for Maths'))
-        BIOLOGY = int(input('Enter the mark for Biology'))
-        CHEMISTRY = int(input('Enter the mark for Chemistry'))
-        PHYSICS = int(input('Enter the mark for Physics'))
+        ENGLISH = int(input('Enter the mark for English: '))
+        MALAYALAM = int(input('Enter the mark for Malayalam: '))
+        MATHS = int(input('Enter the mark for Maths: '))
+        BIOLOGY = int(input('Enter the mark for Biology: '))
+        CHEMISTRY = int(input('Enter the mark for Chemistry: '))
+        PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
-            "insert into tp1 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
+            "insert ignore into tp1 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
                                                                                          CHEMISTRY, PHYSICS))
         conn.commit()
     elif exam == '2':
         STD_ID = int(input("Enter The Student Id: "))
         STD_NAME = input("Enter the Name: ")
-        ENGLISH = int(input('Enter the mark for Engish'))
-        MALAYALAM = int(input('Enter the mark for Malayalam'))
-        MATHS = int(input('Enter the mark for Maths'))
-        BIOLOGY = int(input('Enter the mark for Biology'))
-        CHEMISTRY = int(input('Enter the mark for Chemistry'))
-        PHYSICS = int(input('Enter the mark for Physics'))
+        ENGLISH = int(input('Enter the mark for English: '))
+        MALAYALAM = int(input('Enter the mark for Malayalam: '))
+        MATHS = int(input('Enter the mark for Maths: '))
+        BIOLOGY = int(input('Enter the mark for Biology: '))
+        CHEMISTRY = int(input('Enter the mark for Chemistry: '))
+        PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
             "insert into tp2 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
@@ -164,12 +164,12 @@ def updatemarklist():
     elif exam == '3':
         STD_ID = int(input("Enter The Student Id: "))
         STD_NAME = input("Enter the Name: ")
-        ENGLISH = int(input('Enter the mark for Engish'))
-        MALAYALAM = int(input('Enter the mark for Malayalam'))
-        MATHS = int(input('Enter the mark for Maths'))
-        BIOLOGY = int(input('Enter the mark for Biology'))
-        CHEMISTRY = int(input('Enter the mark for Chemistry'))
-        PHYSICS = int(input('Enter the mark for Physics'))
+        ENGLISH = int(input('Enter the mark for English: '))
+        MALAYALAM = int(input('Enter the mark for Malayalam: '))
+        MATHS = int(input('Enter the mark for Maths: '))
+        BIOLOGY = int(input('Enter the mark for Biology: '))
+        CHEMISTRY = int(input('Enter the mark for Chemistry: '))
+        PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
             "insert into tp3 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
@@ -178,12 +178,12 @@ def updatemarklist():
     elif exam == '4':
         STD_ID = int(input("Enter The Student Id: "))
         STD_NAME = input("Enter the Name: ")
-        ENGLISH = int(input('Enter the mark for Engish'))
-        MALAYALAM = int(input('Enter the mark for Malayalam'))
-        MATHS = int(input('Enter the mark for Maths'))
-        BIOLOGY = int(input('Enter the mark for Biology'))
-        CHEMISTRY = int(input('Enter the mark for Chemistry'))
-        PHYSICS = int(input('Enter the mark for Physics'))
+        ENGLISH = int(input('Enter the mark for English: '))
+        MALAYALAM = int(input('Enter the mark for Malayalam: '))
+        MATHS = int(input('Enter the mark for Maths: '))
+        BIOLOGY = int(input('Enter the mark for Biology: '))
+        CHEMISTRY = int(input('Enter the mark for Chemistry: '))
+        PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
             "insert into tp4 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,

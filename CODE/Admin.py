@@ -37,7 +37,6 @@ def stdregister():
     std_headers = ['Selected Option']
     std_table = [['Student Register']]
     print(tabulate(std_table, std_headers, tablefmt="fancy_grid", floatfmt=".1f"))
-    STD_ID = int(input("Enter The Student Id: "))
     STD_NAME = input("Enter the Name: ")
     STD_GRADEE = int(input("Enter the grade: "))
     STD_NO = int(input("Enter Your Phone Number: "))
@@ -46,11 +45,13 @@ def stdregister():
     day = int(input('Enter The Day: '))
     STD_AGE = datetime.datetime(year, month, day)
     STD_ADDRESS = input('Enter The Address: ')
+
     mycursor.execute(
-        "insert into students values('{}','{}', '{}', '{}','{}''{}')".format(STD_ID, STD_NAME, STD_GRADEE, STD_AGE,
-                                                                             STD_NO, STD_ADDRESS))
+        "insert into students(STD_NAME, STD_GRADEE, STD_AGE,STD_NUMBER, STD_ADDRESS)"
+        "values('{}', '{}', '{}', '{}', '{}')"
+        .format(STD_NAME, STD_GRADEE, STD_AGE,STD_NO, STD_ADDRESS))
     conn.commit()
-    print('Entry Sucessful')
+    print('***********Entry Successful***********')
 
 
 def empregister():
@@ -68,7 +69,7 @@ def empregister():
         "insert into teacher ( TEACHER_NAME, TEACHER_DEPT, TEACHER_NO, TEACHER_AGE) "
         "values('{}', '{}', '{}','{}')".format(TEACHER_NAME, TEACHER_DEPT, TEACHER_NO, TEACHER_AGE))
     conn.commit()
-    print('Entry Sucessful')
+    print('***********Entry Successful***********')
 
 
 def stdlist():
