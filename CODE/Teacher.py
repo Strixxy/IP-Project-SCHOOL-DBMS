@@ -21,7 +21,7 @@ def sqlprint():
 def teacher():
     while True:
         tea_table = [[1, "STUDENT LIST"], [2, "STUDENT DETAILS"], [3, 'MARKLIST'], [4, 'CLASS AVERAGE'],
-                     [5, 'ADD TP MARKS'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
+                     [5, 'CONDUCT A NEW EXAM'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
                      ['*', 'EXIT']]
         tea_headers = ['Teacher Menu']
         print(tabulate(tea_table, tea_headers, tablefmt="fancy_grid", floatfmt=".1f"))
