@@ -21,11 +21,11 @@ def sqlprint():
 def teacher():
     while True:
         tea_table = [[1, "STUDENT LIST"], [2, "STUDENT DETAILS"], [3, 'MARKLIST'], [4, 'CLASS AVERAGE'],
-                     [5, 'CONDUCT A NEW EXAM'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
+                     [5, 'ADD TP MARK'], [6, 'CLASS YEARLY PERFORMANCE'], [0, 'GO BACK TO THE MAIN MENU'],
                      ['*', 'EXIT']]
         tea_headers = ['Teacher Menu']
         print(tabulate(tea_table, tea_headers, tablefmt="fancy_grid", floatfmt=".1f"))
-        choice: str or int = input('Enter Your Choice').upper()
+        choice: str or int = input('Enter Your Choice: ').upper()
         if choice == '1' or choice == 'STUDENT LIST':
             stdlist()
         elif choice == '2' or choice == 'STUDENT DETAILS':
@@ -99,24 +99,28 @@ def classaverage():
             "select avg(ENGLISH), avg(MALAYALAM) , avg(Maths) , avg(BIOLOGY) , "
             "avg(CHEMISTRY), avg(PHYSICS)  from tp1")
         sqlprint()
+        print('***********Entry Successful***********')
     elif exam == '2':
         mycursor.execute(
             "select  avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
             " avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp2")
         sqlprint()
+        print('***********Entry Successful***********')
     elif exam == '3':
         mycursor.execute(
             "select avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths,"
             " avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp3")
         sqlprint()
+        print('***********Entry Successful***********')
     elif exam == '4':
         mycursor.execute(
             "select avg(ENGLISH) as English, avg(MALAYALAM) as Malayalam, avg(Maths) as Maths, "
             "avg(BIOLOGY) as Biology,"
             " avg(CHEMISTRY) as Chemistry, avg(PHYSICS) as Physics from tp4")
         sqlprint()
+        print('***********Entry Successful***********')
     else:
         print('Wrong Option')
 
@@ -133,9 +137,8 @@ def updatemarklist():
     print(tabulate(table, headers, tablefmt="fancy_grid", floatfmt=".1f"))
     exam = input('Select The TP: ')
     if exam == '1':
-        # todo examinput() The variables are not getting read when i call the function
         STD_ID = int(input("Enter The Student Id: "))
-        STD_NAME = input("Enter the Name: ")
+        # STD_NAME = input("Enter the Name: ")
         ENGLISH = int(input('Enter the mark for English: '))
         MALAYALAM = int(input('Enter the mark for Malayalam: '))
         MATHS = int(input('Enter the mark for Maths: '))
@@ -143,13 +146,14 @@ def updatemarklist():
         CHEMISTRY = int(input('Enter the mark for Chemistry: '))
         PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
-            "insert ignore into tp1 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
+            "UPDATE tp1 set ENGLISH = '{}', MALAYALAM= '{}',MATHS ='{}', BIOLOGY= '{}',CHEMISTRY= '{}',PHYSICS= '{}' WHERE STD_ID = '{}'".format(ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
-                                                                                         CHEMISTRY, PHYSICS))
+                                                                                         CHEMISTRY, PHYSICS,STD_ID))
+        print('***********Entry Successful***********')
         conn.commit()
     elif exam == '2':
         STD_ID = int(input("Enter The Student Id: "))
-        STD_NAME = input("Enter the Name: ")
+        # STD_NAME = input("Enter the Name: ")
         ENGLISH = int(input('Enter the mark for English: '))
         MALAYALAM = int(input('Enter the mark for Malayalam: '))
         MATHS = int(input('Enter the mark for Maths: '))
@@ -157,13 +161,14 @@ def updatemarklist():
         CHEMISTRY = int(input('Enter the mark for Chemistry: '))
         PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
-            "insert into tp2 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
+            "UPDATE tp2 set ENGLISH = '{}', MALAYALAM= '{}',MATHS = '{}', BIOLOGY= '{}',CHEMISTRY= '{}',PHYSICS= '{}' WHERE STD_ID = '{}'".format(ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
-                                                                                         CHEMISTRY, PHYSICS))
+                                                                                         CHEMISTRY, PHYSICS,STD_ID))
         conn.commit()
+        print('***********Entry Successful***********')
     elif exam == '3':
         STD_ID = int(input("Enter The Student Id: "))
-        STD_NAME = input("Enter the Name: ")
+        # STD_NAME = input("Enter the Name: ")
         ENGLISH = int(input('Enter the mark for English: '))
         MALAYALAM = int(input('Enter the mark for Malayalam: '))
         MATHS = int(input('Enter the mark for Maths: '))
@@ -171,13 +176,14 @@ def updatemarklist():
         CHEMISTRY = int(input('Enter the mark for Chemistry: '))
         PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
-            "insert into tp3 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
+            "UPDATE tp3 set ENGLISH = '{}', MALAYALAM= '{}',MATHS = '{}', BIOLOGY= '{}',CHEMISTRY= '{}',PHYSICS= '{}' WHERE STD_ID = '{}'".format(ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
-                                                                                         CHEMISTRY, PHYSICS))
+                                                                                         CHEMISTRY, PHYSICS,STD_ID))
         conn.commit()
+        print('***********Entry Successful***********')
     elif exam == '4':
         STD_ID = int(input("Enter The Student Id: "))
-        STD_NAME = input("Enter the Name: ")
+        # STD_NAME = input("Enter the Name: ")
         ENGLISH = int(input('Enter the mark for English: '))
         MALAYALAM = int(input('Enter the mark for Malayalam: '))
         MATHS = int(input('Enter the mark for Maths: '))
@@ -185,10 +191,11 @@ def updatemarklist():
         CHEMISTRY = int(input('Enter the mark for Chemistry: '))
         PHYSICS = int(input('Enter the mark for Physics: '))
         mycursor.execute(
-            "insert into tp4 values('{}','{}', '{}', '{}','{}', '{}', '{}','{}')".format(STD_ID, STD_NAME, ENGLISH,
+            "UPDATE tp4 set ENGLISH = '{}', MALAYALAM= '{}',MATHS = '{}', BIOLOGY= '{}',CHEMISTRY= '{}',PHYSICS= '{}' WHERE STD_ID = '{}'".format(ENGLISH,
                                                                                          MALAYALAM, MATHS, BIOLOGY,
-                                                                                         CHEMISTRY, PHYSICS))
+                                                                                         CHEMISTRY, PHYSICS,STD_ID))
         conn.commit()
+        print('***********Entry Successful***********')
     else:
         print('Wrong Option')
 

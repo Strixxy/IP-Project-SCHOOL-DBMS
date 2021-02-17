@@ -1,0 +1,1 @@
+print(soup.prettify().encode('cp1252', errors='ignore'))
